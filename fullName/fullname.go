@@ -6,8 +6,8 @@ import (
 	"regexp"
 )
 
-func main() {}
-
+// 構造体をプライベートにすると、他パッケージから参照できない。（変数宣言時の型としても参照できない）
+// なのでプライベートにする場合はパッケージ内のみで使われるケースに限るのではないか
 type FullName struct {
 	first string
 	last  string
