@@ -39,6 +39,8 @@ func TestNewFullName(t *testing.T) {
 		"first and last name is valid": {"first", "last", false},
 		"first name is empty":          {"", "last", true},
 		"last name is empty":           {"first", "", true},
+		"first name is valid":          {"fir-st", "last", true},
+		"last name is valid":           {"first", "la@st", true},
 	}
 
 	for k, v := range cases {
@@ -56,4 +58,35 @@ func TestNewFullName(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestValidateName(t *testing.T) {
+	cases := map[string]struct {
+		value string
+		valid bool
+	}{
+		"alphabet only":            {"abcde", true},
+		"ALPHABET only":            {"ABCDE", true},
+		"hiragana only":            {"あいうえお", true},
+		"katakana only":            {"アイウエオ", true},
+		"kanji only":               {"漢字", true},
+		"number only":              {"012345", false},
+		"alphabet included symbol": {"ab-cde", false},
+		"ALPHABET included symbol": {"AB-CDE", false},
+		"hiragana included symbol": {"あい-うえお", false},
+		"katakana included symbol": {"アイ-ウエオ", false},
+		"kanji included symbol":    {"漢字-", false},
+		"symbol only":              {"!-/:-@¥[-`{-~", false},
+		"symbol":                   {"]", false},
+	}
+
+	for k, v := range cases {
+		name := k
+		tc := v
+		t.Run(name, func(t *testing.T) {
+			got := validateName(tc.value)
+			assert.Equal(t, tc.valid, got)
+		})
+	}
+
 }
