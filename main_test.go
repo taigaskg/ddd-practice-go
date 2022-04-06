@@ -29,3 +29,31 @@ func TestEqual(t *testing.T) {
 		})
 	}
 }
+
+func TestNewFullName(t *testing.T) {
+	cases := map[string]struct {
+		firstName string
+		lastName  string
+		isError   bool
+	}{
+		"first and last name is valid": {"first", "last", false},
+		"first name is empty":          {"", "last", true},
+		"last name is empty":           {"first", "", true},
+	}
+
+	for k, v := range cases {
+		name := k
+		tc := v
+		t.Run(name, func(t *testing.T) {
+			fn, err := NewFullName(tc.firstName, tc.lastName)
+			if tc.isError {
+				assert.Nil(t, fn)
+				assert.Error(t, err)
+			} else {
+				assert.NotNil(t, fn)
+				assert.Equal(t, &FullName{tc.firstName, tc.lastName}, fn)
+				assert.NoError(t, err)
+			}
+		})
+	}
+}

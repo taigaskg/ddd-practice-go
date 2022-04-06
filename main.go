@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 func main() {}
 
 type FullName struct {
@@ -7,8 +9,16 @@ type FullName struct {
 	last  string
 }
 
-func NewFullName(first, last string) *FullName {
-	return &FullName{first, last}
+func NewFullName(first, last string) (*FullName, error) {
+	if first == "" {
+		return nil, errors.New("first name is required")
+	}
+
+	if last == "" {
+		return nil, errors.New("last name is required")
+	}
+
+	return &FullName{first, last}, nil
 }
 
 // 構造体はすべてのフィールドが比較可能である場合、値は比較可能。対応する非空白フィールドが等しい場合、2つの構造体値は等しくなる。
