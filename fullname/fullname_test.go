@@ -47,6 +47,7 @@ func TestNewFullName(t *testing.T) {
 		name := k
 		tc := v
 		t.Run(name, func(t *testing.T) {
+			t.Parallel()
 			fn, err := NewFullName(tc.firstName, tc.lastName)
 			if tc.isError {
 				assert.Nil(t, fn)
@@ -84,6 +85,7 @@ func TestValidateName(t *testing.T) {
 		name := k
 		tc := v
 		t.Run(name, func(t *testing.T) {
+			t.Parallel()
 			got := validateName(tc.value)
 			assert.Equal(t, tc.valid, got)
 		})
