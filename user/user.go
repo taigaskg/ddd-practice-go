@@ -6,18 +6,25 @@ import (
 )
 
 type User struct {
-	Id   UserId
-	Name UserName
+	id   UserId
+	name UserName
 }
 
 func NewUser(id UserId, name UserName) *User {
-	return &User{Id: id, Name: name}
+	return &User{id: id, name: name}
 }
 
-// TODO: このようなメソッドを作るのはGoらしいのか？直接プロパティ変更も可能だが。いらないのでは？
-// func (u *User) ChangeName(name UserName) {
-// 	u.Name = name
-// }
+func (u *User) SetName(name UserName) {
+	u.name = name
+}
+
+func (u *User) GetId() UserId {
+	return u.id
+}
+
+func (u *User) GetName() UserName {
+	return u.name
+}
 
 // TODO: ここのようにstring型にするのがいいのか、UserNameのようにstruct型にするのがよいのか？
 type UserId string
