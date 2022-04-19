@@ -10,12 +10,22 @@ type User struct {
 	name UserName
 }
 
-func NewUser(id UserId, name UserName) *User {
-	return &User{id: id, name: name}
+func NewUser(id UserId, name UserName) (*User, error) {
+	if id == (UserId{}) {
+		return nil, errors.New("id must not be empty struct")
+	}
+	if name == (UserName{}) {
+		return nil, errors.New("name must not be empty struct")
+	}
+	return &User{id: id, name: name}, nil
 }
 
-func (u *User) SetName(name UserName) {
+func (u *User) SetName(name UserName) error {
+	if name == (UserName{}) {
+		return errors.New("name must not be empty struct")
+	}
 	u.name = name
+	return nil
 }
 
 func (u *User) GetId() UserId {
