@@ -26,15 +26,15 @@ func (u *User) GetName() UserName {
 	return u.name
 }
 
-// TODO: ここのようにstring型にするのがいいのか、UserNameのようにstruct型にするのがよいのか？
-type UserId string
+type UserId struct {
+	value string
+}
 
 func NewUserId(value string) (*UserId, error) {
 	if value == "" {
 		return nil, errors.New("value must not be empty")
 	}
-	u := UserId(value)
-	return &u, nil
+	return &UserId{value}, nil
 }
 
 type UserName struct {
