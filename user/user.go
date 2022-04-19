@@ -19,6 +19,7 @@ func NewUser(id UserId, name UserName) *User {
 // 	u.Name = name
 // }
 
+// TODO: ここのようにstring型にするのがいいのか、UserNameのようにstruct型にするのがよいのか？
 type UserId string
 
 func NewUserId(value string) (*UserId, error) {
