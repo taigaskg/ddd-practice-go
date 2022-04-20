@@ -36,6 +36,10 @@ func (u *User) GetName() UserName {
 	return u.name
 }
 
+func (u *User) Equals(other User) bool {
+	return u.id == other.id
+}
+
 type UserId struct {
 	value string
 }
