@@ -64,12 +64,3 @@ func NewUserName(value string) (*UserName, error) {
 	}
 	return &UserName{value}, nil
 }
-
-//  ドメインサービスはインスタンス特有の状態をもたない。
-// JavaなどのOOPの場合、UserServiceなどのドメインサービスのクラスを作るだろう。
-// Goの場合はOOPではないので、クラスを作る代わりに構造体を定義するのは違和感がある。
-// 同じパッケージの関数として定義するか別パッケージの関数にするか？どちらが良いのか？TODO:
-func Exists(u *User) bool {
-	// TODO:
-	return false
-}
