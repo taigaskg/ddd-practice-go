@@ -1,4 +1,4 @@
-package money
+package model
 
 import (
 	"errors"

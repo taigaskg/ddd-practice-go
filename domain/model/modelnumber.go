@@ -1,4 +1,4 @@
-package modelnumber
+package model
 
 import (
 	"errors"
@@ -11,7 +11,7 @@ type ModelNumber struct {
 	lot         string
 }
 
-func New(productCode, branch, lot string) (*ModelNumber, error) {
+func NewModelNumber(productCode, branch, lot string) (*ModelNumber, error) {
 	if productCode == "" {
 		return nil, errors.New("productCode must not be empty")
 	}
