@@ -3,6 +3,8 @@ package model
 import (
 	"errors"
 	"unicode/utf8"
+
+	"github.com/google/uuid"
 )
 
 type User struct {
@@ -10,16 +12,15 @@ type User struct {
 	name UserName
 }
 
-// func NewUser(id UserId, name UserName) (*User, error) {
-func NewUser(name UserName) (*User, error) {
-	// if id == (UserId{}) {
-	// 	return nil, errors.New("id must not be empty struct")
-	// }
+func NewUser(id UserId, name UserName) (*User, error) {
 	if name == (UserName{}) {
 		return nil, errors.New("name must not be empty struct")
 	}
-	// return &User{id: id, name: name}, nil
-	return &User{name: name}, nil
+
+	if id == (UserId{}) {
+		return &User{id: UserId{uuid.NewString()}, name: name}, nil
+	}
+	return &User{id: id, name: name}, nil
 }
 
 func (u *User) SetName(name UserName) error {
