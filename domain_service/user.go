@@ -26,7 +26,13 @@ func (us *UserService) Exists(u *model.User) bool {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return rows.Next() // TODO: こういう使い方は大丈夫？
+
+	var cnt int
+	for rows.Next() {
+		cnt++
+	}
+	defer rows.Close()
+	return cnt > 0
 }
 
 const (
