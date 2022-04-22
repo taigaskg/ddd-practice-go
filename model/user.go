@@ -53,6 +53,10 @@ func NewUserId(value string) (*UserId, error) {
 	return &UserId{value}, nil
 }
 
+func (ui *UserId) ToString() string {
+	return ui.value
+}
+
 type UserName struct {
 	value string
 }
@@ -65,4 +69,8 @@ func NewUserName(value string) (*UserName, error) {
 		return nil, errors.New("value must be more than 3 characters.")
 	}
 	return &UserName{value}, nil
+}
+
+func (un *UserName) ToString() string {
+	return un.value
 }
