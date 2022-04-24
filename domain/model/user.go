@@ -8,17 +8,17 @@ import (
 )
 
 type User struct {
-	id   UserId
+	id   UserID
 	name UserName
 }
 
-func NewUser(id UserId, name UserName) (*User, error) {
+func NewUser(id UserID, name UserName) (*User, error) {
 	if name == (UserName{}) {
 		return nil, errors.New("name must not be empty struct")
 	}
 
-	if id == (UserId{}) {
-		return &User{id: UserId{uuid.NewString()}, name: name}, nil
+	if id == (UserID{}) {
+		return &User{id: UserID{uuid.NewString()}, name: name}, nil
 	}
 	return &User{id: id, name: name}, nil
 }
@@ -31,11 +31,11 @@ func (u *User) SetName(name UserName) error {
 	return nil
 }
 
-func (u *User) GetId() UserId {
+func (u *User) ID() UserID {
 	return u.id
 }
 
-func (u *User) GetName() UserName {
+func (u *User) Name() UserName {
 	return u.name
 }
 
@@ -43,18 +43,18 @@ func (u *User) Equals(other User) bool {
 	return u.id == other.id
 }
 
-type UserId struct {
+type UserID struct {
 	value string
 }
 
-func NewUserId(value string) (*UserId, error) {
+func NewUserID(value string) (*UserID, error) {
 	if value == "" {
 		return nil, errors.New("value must not be empty")
 	}
-	return &UserId{value}, nil
+	return &UserID{value}, nil
 }
 
-func (ui *UserId) ToString() string {
+func (ui *UserID) ToString() string {
 	return ui.value
 }
 

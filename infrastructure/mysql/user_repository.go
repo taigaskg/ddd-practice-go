@@ -32,7 +32,7 @@ func (r *userRepository) FetchByName(name string) ([]*model.User, error) {
 			return nil, err
 		}
 
-		userId, err := model.NewUserId(id)
+		userId, err := model.NewUserID(id)
 		if err != nil {
 			return nil, err
 		}
@@ -54,7 +54,7 @@ func (r *userRepository) Register(user *model.User) error {
 		return err
 	}
 
-	_, err = stmt.Exec(user.GetId(), user.GetName())
+	_, err = stmt.Exec(user.ID(), user.Name())
 	if err != nil {
 		return err
 	}

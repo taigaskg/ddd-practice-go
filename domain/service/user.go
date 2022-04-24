@@ -11,7 +11,7 @@ type UserService struct {
 }
 
 func (us *UserService) Exists(u *model.User) bool {
-	username := u.GetName()
+	username := u.Name() // TODO: Go wayな書き方ではgetterにGetをつけない
 	users, err := us.UserRepos.FetchByName(username.ToString())
 	if err != nil {
 		log.Fatal(err)
