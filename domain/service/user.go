@@ -3,7 +3,6 @@ package service
 import (
 	"ddd-practice-go/domain/model"
 	"ddd-practice-go/domain/repository"
-	"log"
 )
 
 type UserService struct {
@@ -11,10 +10,10 @@ type UserService struct {
 }
 
 func (us *UserService) Exists(u *model.User) bool {
-	username := u.Name() // TODO: Go wayな書き方ではgetterにGetをつけない
+	username := u.Name()
 	users, err := us.UserRepos.FetchByName(username.ToString())
 	if err != nil {
-		log.Fatal(err)
+		// TODO: error
 	}
 	return len(users) > 0
 }
