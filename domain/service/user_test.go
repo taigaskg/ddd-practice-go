@@ -14,7 +14,8 @@ import (
 )
 
 func TestExists(t *testing.T) {
-	mockUserRepository := new(mocks.UserRepository)
+	// mockUserRepository := new(mocks.UserRepository)
+	mockUserRepository := mocks.NewUserRepository(t)
 	us := UserService{mockUserRepository}
 
 	userID, err := model.NewUserID("id")
