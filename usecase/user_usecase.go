@@ -4,6 +4,7 @@ import (
 	"ddd-practice-go/domain/model"
 	"ddd-practice-go/domain/repository"
 	"ddd-practice-go/domain/service"
+	"errors"
 )
 
 type UserUsecase interface {
@@ -26,8 +27,11 @@ func (uu *userUsecase) CreateUser(userName string) error {
 		// TODO: error
 	}
 	us := service.UserService{UserRepos: *uu.ur}
-	if us.Exists(user) {
-		// TODO: error
+	if res, err := us.Exists(user); res {
+		if err != nil {
+			return err
+		}
+		return errors.New("duplicate user name")
 	}
 
 	err = (*uu.ur).Register(user)

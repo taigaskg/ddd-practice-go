@@ -3,7 +3,6 @@ package mysql
 import (
 	"database/sql"
 	"ddd-practice-go/domain/model"
-	"log"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -19,7 +18,7 @@ func NewUserRepository(db *sql.DB) *userRepository {
 func (r *userRepository) FetchByName(name string) ([]*model.User, error) {
 	rows, err := r.DB.Query("SELECT * FROM users WHERE name = ?", name)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer rows.Close()
 
